@@ -1,0 +1,5 @@
+# A maven repository must be served byte-for-byte: the .md5/.sha1/.sha256/.sha512
+# files pin the exact bytes of the POMs and the jar. Any end-of-line conversion
+# on checkout would change those bytes and make every checksum mismatch, so
+# disable all text conversion for this repository.
+* -text

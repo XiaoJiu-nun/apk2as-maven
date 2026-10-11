@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.reno.plugin</groupId>
+  <artifactId>Plugin</artifactId>
+  <version>1.0.5</version>
+  <packaging>jar</packaging>
+  <name>apk2as gradle plugin</name>
+  <description>Rebuilds an APK from the Android Studio project produced by apk2as.</description>
+  <url>https://github.com/XiaoJiu-nun/apk2as-maven</url>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>XiaoJiu-nun</name>
+      <url>https://github.com/XiaoJiu-nun</url>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/XiaoJiu-nun/apk2as-maven.git</connection>
+    <url>https://github.com/XiaoJiu-nun/apk2as-maven</url>
+  </scm>
+  <!-- No <dependencies>: the plugin jar is self-contained. Everything it needs
+       at runtime (smali, dexlib2, dex2jar, r8/D8, okhttp, okio, fastjson, the
+       relocated asm) is bundled inside it, and Gradle/Groovy come from the
+       plugin host. Declaring jar contents as dependencies would make Gradle
+       pull a second, conflicting copy of each - and drag in their transitive
+       trees (guava, animal-sniffer, ...) which offline builds cannot resolve. -->
+  <dependencies/>
+</project>
