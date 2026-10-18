@@ -62,6 +62,30 @@ keeps only the ~10 k classes it can actually load, plus every non-class
 resource. Measured: the same APK repacks byte-for-byte identically
 (64112/64112 classes, 0 missing) on the thinned jar.
 
+## Class integrity check
+
+Every build that re-runs the dex merge compares the classes declared by the
+project's smali sources against the classes actually present in the merged dex:
+
+```
+class integrity: 64112 declared by smali, 64112 in merged dex, 0 missing
+```
+
+A shortfall fails the build and lists the offending types, because an APK that
+is missing classes still installs and launches - it only dies when one of them
+is loaded, which is far harder to diagnose than a build error.
+
+Classes present in the dex but absent from the source are expected (AGP
+regenerates R, the javac step adds BuildConfig, instrumentation adds helpers)
+and are ignored.
+
+Set `apk2as.classIntegrity` in `gradle.properties` to tune it:
+
+```properties
+apk2as.classIntegrity=warn   # report but keep building; default is "fail"
+apk2as.classIntegrity=off    # skip the check entirely
+```
+
 ## Publishing a new version
 
 ```bash
